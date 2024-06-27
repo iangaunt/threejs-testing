@@ -8,26 +8,18 @@ import { TeapotGeometry } from "three/examples/jsm/geometries/TeapotGeometry";
 import React from "react";
 import { createRoot } from "react-dom/client";
 
-function App() {
-    return (
-        <div className="container">
-            <h1>Ian's React Skeleton</h1>
-            <h2>Feel free to begin editing <span>index.tsx</span>.</h2>
-        </div>
-    )
-}
-
 const scene = new THREE.Scene();
-scene.background = new THREE.Color( 0x222222 );
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-camera.position.z = 4;
 
-const renderer = new THREE.WebGLRenderer();
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+camera.position.z = 20;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.setClearColor( 0x000000, 0 );
 document.body.appendChild( renderer.domElement );
 
-const controls = new OrbitControls(camera, renderer.domElement)
-controls.target.set( 0, 0, 0 );
+// const controls = new OrbitControls(camera, renderer.domElement)
+// controls.target.set( 0, 0, 0 );
 
 const teapot = new THREE.Mesh(
     new TeapotGeometry(1.5, 15),
@@ -81,8 +73,6 @@ scene.add( dl, dlHelper );
 
 let time = 0.0;
 function animate() {
-    teapot.rotation.x += 0.025;
-    teapot.rotation.y += 0.025;
 
     for (let i = 0; i < cubes.length; i++) {
         let c = cubes[i];
